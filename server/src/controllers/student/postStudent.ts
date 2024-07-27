@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Student from "../models/student/student";
+import Student from "../../models/student/student";
 
 const postStudent = async (req: Request, res: Response) => {
   try {
@@ -49,7 +49,7 @@ const postStudent = async (req: Request, res: Response) => {
 
     console.log("Student saved successfully");
 
-    return res.status(200).json({
+    return res.status(201).json({
       status: "success",
       message: "Student added successfully",
     });
