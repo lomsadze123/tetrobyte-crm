@@ -1,9 +1,33 @@
+import fetchStudent from "@/_actions/fetchSingleStudent/fetchSingleStudent";
 import postUser from "@/_actions/postUser/postUser";
+import { useEffect, useState } from "react";
+// import updateUser from "@/_actions/updateUser/updateUser";
 
-const AddNewStudent = () => {
+const StudentForm = ({
+  mode,
+  id,
+}: {
+  mode: "view" | "edit" | "add";
+  id: string;
+}) => {
+  const isReadOnly = mode === "view";
+  const formAction = mode === "add" ? postUser : "s";
+  const [student, setStudent] = useState<StudentsTypes["students"][0] | null>(
+    null
+  );
+
+  useEffect(() => {
+    const handleFetchStudent = async () => {
+      const response = await fetchStudent(id);
+      setStudent(response.student);
+    };
+
+    handleFetchStudent();
+  }, []);
+
   return (
     <div className="container mx-auto p-8">
-      <form action={postUser} className="grid grid-cols-2 gap-4">
+      <form action={formAction} className="grid grid-cols-2 gap-4">
         <div>
           <label
             htmlFor="firstName"
@@ -17,6 +41,8 @@ const AddNewStudent = () => {
             type="text"
             className="w-full border rounded px-3 py-2"
             placeholder="სახელი"
+            readOnly={isReadOnly}
+            defaultValue={student?.firstName || ""}
           />
         </div>
         <div>
@@ -32,6 +58,8 @@ const AddNewStudent = () => {
             type="text"
             className="w-full border rounded px-3 py-2"
             placeholder="გვარი"
+            readOnly={isReadOnly}
+            defaultValue={student?.lastName || ""}
           />
         </div>
         <div>
@@ -48,6 +76,8 @@ const AddNewStudent = () => {
             maxLength={11}
             className="w-full border rounded px-3 py-2"
             placeholder="პირადი ნომერი"
+            readOnly={isReadOnly}
+            defaultValue={student?.personalNumber || ""}
           />
         </div>
         <div>
@@ -61,10 +91,11 @@ const AddNewStudent = () => {
             id="enrollmentYear"
             name="enrollmentYear"
             className="w-full border rounded px-3 py-2"
+            disabled={isReadOnly}
           >
-            <option>წელი</option>
+            <option>{isReadOnly ? student?.enrollmentYear : "წელი"}</option>
             <option value="2020-2021">2020-2021</option>
-            {/* options */}
+            {/* Add more options as needed */}
           </select>
         </div>
         <div>
@@ -78,10 +109,11 @@ const AddNewStudent = () => {
             id="dateOfBirth"
             name="dateOfBirth"
             className="w-full border rounded px-3 py-2"
+            disabled={isReadOnly}
           >
-            <option>თარიღი</option>
+            <option>{isReadOnly ? student?.dateOfBirth : "თარიღი"}</option>
             <option value="2024-2025">2024-2025</option>
-            {/* options */}
+            {/* Add more options as needed */}
           </select>
         </div>
         <div>
@@ -95,10 +127,11 @@ const AddNewStudent = () => {
             id="birthCity"
             name="birthCity"
             className="w-full border rounded px-3 py-2"
+            disabled={isReadOnly}
           >
-            <option>ქალაქი</option>
+            <option>{isReadOnly ? student?.birthCity : "ქალაქი"}</option>
             <option value="რუსთავი">რუსთავი</option>
-            {/* options */}
+            {/* Add more options as needed */}
           </select>
         </div>
         <div>
@@ -112,10 +145,11 @@ const AddNewStudent = () => {
             id="school"
             name="school"
             className="w-full border rounded px-3 py-2"
+            disabled={isReadOnly}
           >
-            <option>სკოლა</option>
+            <option>{isReadOnly ? student?.school : "სკოლა"}</option>
             <option value="TLS">TLS</option>
-            {/* options */}
+            {/* Add more options as needed */}
           </select>
         </div>
         <div>
@@ -129,10 +163,11 @@ const AddNewStudent = () => {
             id="program"
             name="program"
             className="w-full border rounded px-3 py-2"
+            disabled={isReadOnly}
           >
-            <option>პროგრამა</option>
+            <option>{isReadOnly ? student?.program : "პროგრამა"}</option>
             <option value="CyberSecurity">CyberSecurity</option>
-            {/* options */}
+            {/* Add more options as needed */}
           </select>
         </div>
         <div>
@@ -148,6 +183,8 @@ const AddNewStudent = () => {
             type="text"
             className="w-full border rounded px-3 py-2"
             placeholder="ვაუჩერი"
+            readOnly={isReadOnly}
+            defaultValue={student?.voucher || ""}
           />
         </div>
         <div>
@@ -161,10 +198,11 @@ const AddNewStudent = () => {
             id="grant"
             name="grant"
             className="w-full border rounded px-3 py-2"
+            disabled={isReadOnly}
           >
-            <option>გრანტი</option>
+            <option>{isReadOnly ? student?.grant : "გრანტი"}</option>
             <option value="700">700</option>
-            {/* options */}
+            {/* Add more options as needed */}
           </select>
         </div>
         <div>
@@ -178,10 +216,11 @@ const AddNewStudent = () => {
             id="citizenship"
             name="citizenship"
             className="w-full border rounded px-3 py-2"
+            disabled={isReadOnly}
           >
-            <option>მოქალაქეობა</option>
+            <option>{isReadOnly ? student?.citizenship : "მოქალაქეობა"}</option>
             <option value="საქართველო">საქართველო</option>
-            {/* options */}
+            {/* Add more options as needed */}
           </select>
         </div>
         <div>
@@ -195,15 +234,18 @@ const AddNewStudent = () => {
             id="languageOfInstruction"
             name="languageOfInstruction"
             className="w-full border rounded px-3 py-2"
+            disabled={isReadOnly}
           >
-            <option>ენა</option>
+            <option>
+              {isReadOnly ? student?.languageOfInstruction : "ენა"}
+            </option>
             <option value="English">English</option>
-            {/* options */}
+            {/* Add more options as needed */}
           </select>
         </div>
         <div>
           <label
-            className="block mb-2 text-sm font-medium text-gray-700"
+            className="block mb-2 text-sm text-left font-medium text-gray-700"
             htmlFor="freshmanOrTransfer"
           >
             FRESHMAN / TRANSFER
@@ -215,6 +257,8 @@ const AddNewStudent = () => {
               value="FRESHMAN"
               className="mr-2"
               id="freshman"
+              disabled={isReadOnly}
+              defaultChecked={student?.freshmanOrTransfer === "FRESHMAN"}
             />
             <label className="mr-4" htmlFor="freshman">
               FRESHMAN
@@ -225,6 +269,8 @@ const AddNewStudent = () => {
               value="TRANSFER"
               className="mr-2"
               id="transfer"
+              disabled={isReadOnly}
+              defaultChecked={student?.freshmanOrTransfer === "TRANSFER"}
             />
             <label htmlFor="transfer">TRANSFER</label>
           </div>
@@ -240,10 +286,13 @@ const AddNewStudent = () => {
             id="mobilitySemesterCourse"
             name="mobilitySemesterCourse"
             className="w-full border rounded px-3 py-2"
+            disabled={isReadOnly}
           >
-            <option>სემესტრი</option>
-            <option value={8}>8</option>
-            {/* options */}
+            <option>
+              {isReadOnly ? student?.mobilitySemesterCourse : "სემესტრი"}
+            </option>
+            <option value="8">8</option>
+            {/* Add more options as needed */}
           </select>
         </div>
         <div>
@@ -257,23 +306,27 @@ const AddNewStudent = () => {
             id="agent"
             name="agent"
             className="w-full border rounded px-3 py-2"
+            disabled={isReadOnly}
+            defaultValue={""} // i must add agent in here -----------------
           >
             <option>აგენტი</option>
             <option value="პაატა">პაატა</option>
-            {/* options */}
+            {/* Add more options as needed */}
           </select>
         </div>
-        <div className="col-span-2">
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white rounded px-4 py-2 mt-4"
-          >
-            დამახსოვრება
-          </button>
-        </div>
+        {mode !== "view" && (
+          <div className="col-span-2">
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-white rounded px-4 py-2 mt-4"
+            >
+              {mode === "add" ? "დამახსოვრება" : "განახლება"}
+            </button>
+          </div>
+        )}
       </form>
     </div>
   );
 };
 
-export default AddNewStudent;
+export default StudentForm;

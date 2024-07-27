@@ -1,6 +1,6 @@
 "use client";
-
 import deleteStudent from "@/_actions/deleteStudent/deleteStudent";
+import AddNewStudent from "@/components/AddNewStudent/AddNewStudent";
 import PopUpContainer from "@/components/PopUpContainer/PopUpContainer";
 import { useState } from "react";
 
@@ -37,7 +37,7 @@ const EditButton = ({ id }: { id: string }) => {
     <>
       {show && (
         <PopUpContainer title={titles[askIndex]} setShow={setShow}>
-          {askIndex === 0 && <div>details</div>}
+          {askIndex === 0 && <AddNewStudent mode="view" id={id} />}
           {askIndex === 1 && (
             <div className="flex items-center gap-2 mt-14">
               <button
