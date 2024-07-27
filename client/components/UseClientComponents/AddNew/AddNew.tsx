@@ -8,7 +8,7 @@ const AddNew = () => {
   return (
     <>
       {show && (
-        <PopUpContainer setShow={setShow}>
+        <PopUpContainer title="ახლის დამატება" setShow={setShow}>
           <AddNewStudent />
         </PopUpContainer>
       )}

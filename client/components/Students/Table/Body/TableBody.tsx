@@ -9,9 +9,7 @@ const TableBody = async () => {
       {studentData.students.map((item, index) => (
         <tr key={item._id}>
           <td className="flex items-center border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            <span className="relative ">
-              <EditButton id={item._id} />
-            </span>
+            <EditButton id={item._id} />
             <span>{item.personalNumber}</span>
           </td>
           <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
