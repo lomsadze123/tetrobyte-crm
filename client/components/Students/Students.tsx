@@ -1,6 +1,8 @@
-import studentData from "@/data/studentData";
+import fetchStudents from "@/_actions/fetchStudents/fetchStudents";
 
-const Students = () => {
+const Students = async () => {
+  const studentData: StudentsTypes = await fetchStudents();
+
   return (
     <section className="py-8">
       <table className="border-b border-gray-200">
@@ -36,7 +38,7 @@ const Students = () => {
           </tr>
         </thead>
         <tbody>
-          {studentData.map((item, index) => (
+          {studentData.students.map((item, index) => (
             <tr key={index}>
               <td className="flex items-center border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
                 <span className="rotate-90 block text-xl font-bold">
