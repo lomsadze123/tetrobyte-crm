@@ -1,9 +1,16 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express, { Express, Request, Response } from "express";
+import connectDB from "./config/db";
+import router from "./routes/main";
 
 const app: Express = express();
+const PORT = process.env.PORT || 3001;
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello world");
-});
+connectDB();
 
-app.listen(3001, () => console.log("Server listening on port 3001"));
+app.use(express.json());
+
+app.use("/api", router);
+
+app.listen(PORT, () => console.log("Server listening on port " + PORT));

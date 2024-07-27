@@ -42,22 +42,22 @@ const Students = () => {
                 <span className="rotate-90 block text-xl font-bold">
                   <button>...</button>
                 </span>
-                <span>{item.id}</span>
+                <span>{item.personalNumber}</span>
               </td>
               <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
                 {item.code}
               </td>
               <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-                {item.name}
+                {item.firstName}
               </td>
               <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-                {item.surname}
+                {item.lastName}
               </td>
               <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-                {item.yearStart}
+                {item.enrollmentYear}
               </td>
               <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-                {item.yearEnd}
+                {item.graduationYear}
               </td>
               <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
                 {item.status}
@@ -69,34 +69,34 @@ const Students = () => {
                 {item.program}
               </td>
               <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-                {item.instructor}
+                {item.email}
               </td>
               <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-                {item.tuitionFee}
+                {item.voucher}
               </td>
               <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-                {item.scholarship}
+                {item.grant}
               </td>
               <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
                 {item.citizenship}
               </td>
               <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-                {item.bornDate}
+                {item.dateOfBirth}
               </td>
               <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-                {item.bornCity}
+                {item.birthCity}
               </td>
               <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-                {item.learnLanguage}
+                {item.languageOfInstruction}
               </td>
               <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-                {item.freshman}
+                {item.freshmanOrTransfer}
               </td>
               <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-                {item.termCourse}
+                {item.mobilitySemesterCourse}
               </td>
               <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-                {item.name}
+                {item.firstName}
               </td>
             </tr>
           ))}
