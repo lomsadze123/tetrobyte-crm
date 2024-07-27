@@ -54,7 +54,7 @@ const EditButton = ({ id }: { id: string }) => {
               </button>
             </div>
           )}
-          {askIndex === 2 && <div>Edit</div>}
+          {askIndex === 2 && <AddNewStudent mode="edit" id={id} />}
         </PopUpContainer>
       )}
       <span className="relative">

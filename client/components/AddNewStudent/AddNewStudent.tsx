@@ -1,5 +1,6 @@
 import fetchStudent from "@/_actions/fetchSingleStudent/fetchSingleStudent";
 import postUser from "@/_actions/postUser/postUser";
+import updateStudent from "@/_actions/updateStudent/updateStudent";
 import { useEffect, useState } from "react";
 // import updateUser from "@/_actions/updateUser/updateUser";
 
@@ -11,23 +12,37 @@ const StudentForm = ({
   id: string;
 }) => {
   const isReadOnly = mode === "view";
-  const formAction = mode === "add" ? postUser : "s";
+  // const formAction = mode === "add" ? postUser : "s";
   const [student, setStudent] = useState<StudentsTypes["students"][0] | null>(
     null
   );
 
   useEffect(() => {
-    const handleFetchStudent = async () => {
-      const response = await fetchStudent(id);
-      setStudent(response.student);
-    };
+    if (mode !== "add") {
+      const handleFetchStudent = async () => {
+        const response = await fetchStudent(id);
+        setStudent(response.student);
+      };
 
-    handleFetchStudent();
-  }, []);
+      handleFetchStudent();
+    }
+  }, [id, mode]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const studentData = Object.fromEntries(formData.entries());
+
+    if (mode === "add") {
+      await postUser(studentData as unknown as FormData);
+    } else if (mode === "edit") {
+      await updateStudent(id, studentData);
+    }
+  };
 
   return (
     <div className="container mx-auto p-8">
-      <form action={formAction} className="grid grid-cols-2 gap-4">
+      <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
         <div>
           <label
             htmlFor="firstName"
@@ -93,7 +108,9 @@ const StudentForm = ({
             className="w-full border rounded px-3 py-2"
             disabled={isReadOnly}
           >
-            <option>{isReadOnly ? student?.enrollmentYear : "წელი"}</option>
+            <option>
+              {isReadOnly || mode === "edit" ? student?.enrollmentYear : "წელი"}
+            </option>
             <option value="2020-2021">2020-2021</option>
             {/* Add more options as needed */}
           </select>
@@ -111,7 +128,9 @@ const StudentForm = ({
             className="w-full border rounded px-3 py-2"
             disabled={isReadOnly}
           >
-            <option>{isReadOnly ? student?.dateOfBirth : "თარიღი"}</option>
+            <option>
+              {isReadOnly || mode === "edit" ? student?.dateOfBirth : "თარიღი"}
+            </option>
             <option value="2024-2025">2024-2025</option>
             {/* Add more options as needed */}
           </select>
@@ -129,7 +148,9 @@ const StudentForm = ({
             className="w-full border rounded px-3 py-2"
             disabled={isReadOnly}
           >
-            <option>{isReadOnly ? student?.birthCity : "ქალაქი"}</option>
+            <option>
+              {isReadOnly || mode === "edit" ? student?.birthCity : "ქალაქი"}
+            </option>
             <option value="რუსთავი">რუსთავი</option>
             {/* Add more options as needed */}
           </select>
@@ -147,7 +168,9 @@ const StudentForm = ({
             className="w-full border rounded px-3 py-2"
             disabled={isReadOnly}
           >
-            <option>{isReadOnly ? student?.school : "სკოლა"}</option>
+            <option>
+              {isReadOnly || mode === "edit" ? student?.school : "სკოლა"}
+            </option>
             <option value="TLS">TLS</option>
             {/* Add more options as needed */}
           </select>
@@ -165,7 +188,9 @@ const StudentForm = ({
             className="w-full border rounded px-3 py-2"
             disabled={isReadOnly}
           >
-            <option>{isReadOnly ? student?.program : "პროგრამა"}</option>
+            <option>
+              {isReadOnly || mode === "edit" ? student?.program : "პროგრამა"}
+            </option>
             <option value="CyberSecurity">CyberSecurity</option>
             {/* Add more options as needed */}
           </select>
@@ -200,7 +225,9 @@ const StudentForm = ({
             className="w-full border rounded px-3 py-2"
             disabled={isReadOnly}
           >
-            <option>{isReadOnly ? student?.grant : "გრანტი"}</option>
+            <option>
+              {isReadOnly || mode === "edit" ? student?.grant : "გრანტი"}
+            </option>
             <option value="700">700</option>
             {/* Add more options as needed */}
           </select>
@@ -218,7 +245,11 @@ const StudentForm = ({
             className="w-full border rounded px-3 py-2"
             disabled={isReadOnly}
           >
-            <option>{isReadOnly ? student?.citizenship : "მოქალაქეობა"}</option>
+            <option>
+              {isReadOnly || mode === "edit"
+                ? student?.citizenship
+                : "მოქალაქეობა"}
+            </option>
             <option value="საქართველო">საქართველო</option>
             {/* Add more options as needed */}
           </select>
@@ -237,7 +268,9 @@ const StudentForm = ({
             disabled={isReadOnly}
           >
             <option>
-              {isReadOnly ? student?.languageOfInstruction : "ენა"}
+              {isReadOnly || mode === "edit"
+                ? student?.languageOfInstruction
+                : "ენა"}
             </option>
             <option value="English">English</option>
             {/* Add more options as needed */}
@@ -289,7 +322,9 @@ const StudentForm = ({
             disabled={isReadOnly}
           >
             <option>
-              {isReadOnly ? student?.mobilitySemesterCourse : "სემესტრი"}
+              {isReadOnly || mode === "edit"
+                ? student?.mobilitySemesterCourse
+                : "სემესტრი"}
             </option>
             <option value="8">8</option>
             {/* Add more options as needed */}
