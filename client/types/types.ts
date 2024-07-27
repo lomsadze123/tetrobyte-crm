@@ -1,5 +1,6 @@
 interface StudentsTypes {
   students: {
+    _id: string;
     personalNumber: string;
     code: string;
     firstName: string;

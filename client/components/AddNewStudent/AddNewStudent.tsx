@@ -1,7 +1,9 @@
+import postUser from "@/_actions/postUser/postUser";
+
 const AddNewStudent = () => {
   return (
     <div className="container mx-auto p-8">
-      <form className="grid grid-cols-2 gap-4">
+      <form action={postUser} className="grid grid-cols-2 gap-4">
         <div>
           <label
             htmlFor="firstName"
@@ -43,55 +45,59 @@ const AddNewStudent = () => {
             id="personalNumber"
             name="personalNumber"
             type="text"
+            maxLength={11}
             className="w-full border rounded px-3 py-2"
             placeholder="პირადი ნომერი"
           />
         </div>
         <div>
           <label
-            htmlFor="enrollYear"
+            htmlFor="enrollmentYear"
             className="block mb-2 text-sm font-medium text-gray-700"
           >
             ჩაბარების წელი
           </label>
           <select
-            id="enrollYear"
-            name="enrollYear"
+            id="enrollmentYear"
+            name="enrollmentYear"
             className="w-full border rounded px-3 py-2"
           >
             <option>წელი</option>
+            <option value="2020-2021">2020-2021</option>
             {/* options */}
           </select>
         </div>
         <div>
           <label
-            htmlFor="graduationYear"
+            htmlFor="dateOfBirth"
             className="block mb-2 text-sm font-medium text-gray-700"
           >
             დაბადების თარიღი
           </label>
           <select
-            id="graduationYear"
-            name="graduationYear"
+            id="dateOfBirth"
+            name="dateOfBirth"
             className="w-full border rounded px-3 py-2"
           >
             <option>თარიღი</option>
+            <option value="2024-2025">2024-2025</option>
             {/* options */}
           </select>
         </div>
         <div>
           <label
-            htmlFor="bornPlace"
+            htmlFor="birthCity"
             className="block mb-2 text-sm font-medium text-gray-700"
           >
             დაბადების ადგილი
           </label>
           <select
-            id="bornPlace"
-            name="bornPlace"
+            id="birthCity"
+            name="birthCity"
             className="w-full border rounded px-3 py-2"
           >
             <option>ქალაქი</option>
+            <option value="რუსთავი">რუსთავი</option>
             {/* options */}
           </select>
         </div>
@@ -108,6 +114,7 @@ const AddNewStudent = () => {
             className="w-full border rounded px-3 py-2"
           >
             <option>სკოლა</option>
+            <option value="TLS">TLS</option>
             {/* options */}
           </select>
         </div>
@@ -124,6 +131,7 @@ const AddNewStudent = () => {
             className="w-full border rounded px-3 py-2"
           >
             <option>პროგრამა</option>
+            <option value="CyberSecurity">CyberSecurity</option>
             {/* options */}
           </select>
         </div>
@@ -155,6 +163,7 @@ const AddNewStudent = () => {
             className="w-full border rounded px-3 py-2"
           >
             <option>გრანტი</option>
+            <option value="700">700</option>
             {/* options */}
           </select>
         </div>
@@ -171,6 +180,7 @@ const AddNewStudent = () => {
             className="w-full border rounded px-3 py-2"
           >
             <option>მოქალაქეობა</option>
+            <option value="საქართველო">საქართველო</option>
             {/* options */}
           </select>
         </div>
@@ -187,17 +197,21 @@ const AddNewStudent = () => {
             className="w-full border rounded px-3 py-2"
           >
             <option>ენა</option>
+            <option value="English">English</option>
             {/* options */}
           </select>
         </div>
         <div>
-          <label className="block mb-2 text-sm font-medium text-gray-700">
+          <label
+            className="block mb-2 text-sm font-medium text-gray-700"
+            htmlFor="freshmanOrTransfer"
+          >
             FRESHMAN / TRANSFER
           </label>
           <div className="flex items-center">
             <input
               type="radio"
-              name="status"
+              name="freshmanOrTransfer"
               value="FRESHMAN"
               className="mr-2"
               id="freshman"
@@ -207,7 +221,7 @@ const AddNewStudent = () => {
             </label>
             <input
               type="radio"
-              name="status"
+              name="freshmanOrTransfer"
               value="TRANSFER"
               className="mr-2"
               id="transfer"
@@ -228,6 +242,7 @@ const AddNewStudent = () => {
             className="w-full border rounded px-3 py-2"
           >
             <option>სემესტრი</option>
+            <option value={8}>8</option>
             {/* options */}
           </select>
         </div>
@@ -244,6 +259,7 @@ const AddNewStudent = () => {
             className="w-full border rounded px-3 py-2"
           >
             <option>აგენტი</option>
+            <option value="პაატა">პაატა</option>
             {/* options */}
           </select>
         </div>

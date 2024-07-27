@@ -1,4 +1,5 @@
 import fetchStudents from "@/_actions/fetchStudents/fetchStudents";
+import EditButton from "@/components/UseClientComponents/EditButton/EditButton";
 
 const TableBody = async () => {
   const studentData: StudentsTypes = await fetchStudents();
@@ -6,10 +7,10 @@ const TableBody = async () => {
   return (
     <tbody>
       {studentData.students.map((item, index) => (
-        <tr key={index}>
+        <tr key={item._id}>
           <td className="flex items-center border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            <span className="rotate-90 block text-xl font-bold">
-              <button>...</button>
+            <span className="relative ">
+              <EditButton id={item._id} />
             </span>
             <span>{item.personalNumber}</span>
           </td>
