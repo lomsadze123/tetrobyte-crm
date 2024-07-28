@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Student from "../../models/student/student";
 
-const fetchStudent = async (req: Request, res: Response) => {
+const fetchStudent = async (_: Request, res: Response) => {
   try {
     const students = await Student.find({});
 

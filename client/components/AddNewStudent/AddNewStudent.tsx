@@ -1,8 +1,4 @@
-import fetchStudent from "@/_actions/fetchSingleStudent/fetchSingleStudent";
-import postStudent from "@/_actions/postStudent/postStudent";
-import updateStudent from "@/_actions/updateStudent/updateStudent";
-import { useEffect, useState } from "react";
-// import updateUser from "@/_actions/updateUser/updateUser";
+import useStudent from "@/hooks/useStudent/useStudent";
 
 const StudentForm = ({
   mode,
@@ -11,41 +7,22 @@ const StudentForm = ({
   mode: "view" | "edit" | "add";
   id: string;
 }) => {
-  const isReadOnly = mode === "view";
-  const [student, setStudent] = useState<StudentsTypes["students"][0] | null>(
-    null
-  );
-
-  useEffect(() => {
-    if (mode !== "add") {
-      const handleFetchStudent = async () => {
-        const response = await fetchStudent(id);
-        setStudent(response.student);
-      };
-
-      handleFetchStudent();
-    }
-  }, [id, mode]);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const studentData = Object.fromEntries(formData.entries());
-
-    if (mode === "add") {
-      await postStudent(new FormData(e.currentTarget));
-    } else if (mode === "edit") {
-      await updateStudent(id, studentData);
-    }
-  };
+  const { handleSubmit, student, isReadOnly } = useStudent({
+    mode,
+    id,
+  });
 
   return (
     <div className="container mx-auto p-8">
-      <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+      {/* more better is action, but in this case we need to have CRS */}
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-2 gap-4 text-primaryBlue text-left"
+      >
         <div>
           <label
             htmlFor="firstName"
-            className="block mb-2 text-sm font-medium text-gray-700"
+            className="block mb-2 text-sm font-semibold"
           >
             სახელი
           </label>
@@ -62,7 +39,7 @@ const StudentForm = ({
         <div>
           <label
             htmlFor="lastName"
-            className="block mb-2 text-sm font-medium text-gray-700"
+            className="block mb-2 text-sm font-semibold"
           >
             გვარი
           </label>
@@ -79,7 +56,7 @@ const StudentForm = ({
         <div>
           <label
             htmlFor="personalNumber"
-            className="block mb-2 text-sm font-medium text-gray-700"
+            className="block mb-2 text-sm font-semibold"
           >
             პირადი ნომერი
           </label>
@@ -97,7 +74,7 @@ const StudentForm = ({
         <div>
           <label
             htmlFor="enrollmentYear"
-            className="block mb-2 text-sm font-medium text-gray-700"
+            className="block mb-2 text-sm font-semibold"
           >
             ჩაბარების წელი
           </label>
@@ -111,13 +88,12 @@ const StudentForm = ({
               {isReadOnly || mode === "edit" ? student?.enrollmentYear : "წელი"}
             </option>
             <option value="2020-2021">2020-2021</option>
-            {/* Add more options as needed */}
           </select>
         </div>
         <div>
           <label
             htmlFor="dateOfBirth"
-            className="block mb-2 text-sm font-medium text-gray-700"
+            className="block mb-2 text-sm font-semibold"
           >
             დაბადების თარიღი
           </label>
@@ -130,14 +106,13 @@ const StudentForm = ({
             <option>
               {isReadOnly || mode === "edit" ? student?.dateOfBirth : "თარიღი"}
             </option>
-            <option value="2024-2025">2024-2025</option>
-            {/* Add more options as needed */}
+            <option value="2020">2000</option>
           </select>
         </div>
         <div>
           <label
             htmlFor="birthCity"
-            className="block mb-2 text-sm font-medium text-gray-700"
+            className="block mb-2 text-sm font-semibold"
           >
             დაბადების ადგილი
           </label>
@@ -151,14 +126,10 @@ const StudentForm = ({
               {isReadOnly || mode === "edit" ? student?.birthCity : "ქალაქი"}
             </option>
             <option value="რუსთავი">რუსთავი</option>
-            {/* Add more options as needed */}
           </select>
         </div>
         <div>
-          <label
-            htmlFor="school"
-            className="block mb-2 text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="school" className="block mb-2 text-sm font-semibold">
             სკოლა
           </label>
           <select
@@ -171,14 +142,10 @@ const StudentForm = ({
               {isReadOnly || mode === "edit" ? student?.school : "სკოლა"}
             </option>
             <option value="TLS">TLS</option>
-            {/* Add more options as needed */}
           </select>
         </div>
         <div>
-          <label
-            htmlFor="program"
-            className="block mb-2 text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="program" className="block mb-2 text-sm font-semibold">
             პროგრამა
           </label>
           <select
@@ -191,14 +158,10 @@ const StudentForm = ({
               {isReadOnly || mode === "edit" ? student?.program : "პროგრამა"}
             </option>
             <option value="CyberSecurity">CyberSecurity</option>
-            {/* Add more options as needed */}
           </select>
         </div>
         <div>
-          <label
-            htmlFor="voucher"
-            className="block mb-2 text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="voucher" className="block mb-2 text-sm font-semibold">
             ვაუჩერი
           </label>
           <input
@@ -212,10 +175,7 @@ const StudentForm = ({
           />
         </div>
         <div>
-          <label
-            htmlFor="grant"
-            className="block mb-2 text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="grant" className="block mb-2 text-sm font-semibold">
             გრანტი
           </label>
           <select
@@ -228,13 +188,12 @@ const StudentForm = ({
               {isReadOnly || mode === "edit" ? student?.grant : "გრანტი"}
             </option>
             <option value="700">700</option>
-            {/* Add more options as needed */}
           </select>
         </div>
         <div>
           <label
             htmlFor="citizenship"
-            className="block mb-2 text-sm font-medium text-gray-700"
+            className="block mb-2 text-sm font-semibold"
           >
             მოქალაქეობა
           </label>
@@ -251,13 +210,12 @@ const StudentForm = ({
             </option>
             <option value="საქართველო">საქართველო</option>
             <option value="საქართველო">ინდოეთი</option>
-            {/* Add more options as needed */}
           </select>
         </div>
         <div>
           <label
             htmlFor="languageOfInstruction"
-            className="block mb-2 text-sm font-medium text-gray-700"
+            className="block mb-2 text-sm font-semibold"
           >
             სწავლის ენა
           </label>
@@ -273,12 +231,11 @@ const StudentForm = ({
                 : "ენა"}
             </option>
             <option value="English">English</option>
-            {/* Add more options as needed */}
           </select>
         </div>
         <div>
           <label
-            className="block mb-2 text-sm text-left font-medium text-gray-700"
+            className="block mb-2 text-sm font-semibold"
             htmlFor="freshmanOrTransfer"
           >
             FRESHMAN / TRANSFER
@@ -291,7 +248,6 @@ const StudentForm = ({
               className="mr-2"
               id="freshman"
               disabled={isReadOnly}
-              defaultChecked={student?.freshmanOrTransfer === "FRESHMAN"}
             />
             <label className="mr-4" htmlFor="freshman">
               FRESHMAN
@@ -303,7 +259,6 @@ const StudentForm = ({
               className="mr-2"
               id="transfer"
               disabled={isReadOnly}
-              defaultChecked={student?.freshmanOrTransfer === "TRANSFER"}
             />
             <label htmlFor="transfer">TRANSFER</label>
           </div>
@@ -311,7 +266,7 @@ const StudentForm = ({
         <div>
           <label
             htmlFor="mobilitySemesterCourse"
-            className="block mb-2 text-sm font-medium text-gray-700"
+            className="block mb-2 text-sm font-semibold"
           >
             მობილობის სემესტრი
           </label>
@@ -327,14 +282,10 @@ const StudentForm = ({
                 : "სემესტრი"}
             </option>
             <option value="8">8</option>
-            {/* Add more options as needed */}
           </select>
         </div>
         <div>
-          <label
-            htmlFor="agent"
-            className="block mb-2 text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="agent" className="block mb-2 text-sm font-semibold">
             აგენტი
           </label>
           <select
@@ -346,16 +297,15 @@ const StudentForm = ({
           >
             <option>აგენტი</option>
             <option value="პაატა">პაატა</option>
-            {/* Add more options as needed */}
           </select>
         </div>
         {mode !== "view" && (
           <div className="col-span-2">
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white rounded px-4 py-2 mt-4"
+              className="w-full bg-primaryBlue text-white rounded px-4 py-3 mt-4"
             >
-              {mode === "add" ? "დამახსოვრება" : "განახლება"}
+              {mode === "add" ? "დამატება" : "შენახვა"}
             </button>
           </div>
         )}

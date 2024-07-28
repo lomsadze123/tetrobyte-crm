@@ -17,7 +17,7 @@ const studentSchema = new Schema({
   dateOfBirth: { type: String, required: true },
   birthCity: { type: String, required: true },
   languageOfInstruction: { type: String, required: true },
-  freshmanOrTransfer: { type: String, required: true },
+  freshmanOrTransfer: { type: String, default: "FRESHMAN" },
   mobilitySemesterCourse: { type: Number, required: true },
 });
 

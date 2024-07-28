@@ -4,10 +4,12 @@ import TableHeader from "./Table/Header/TableHeader";
 const Students = () => {
   return (
     <section className="py-8">
-      <table className="border-b border-gray-200">
-        <TableHeader />
-        <TableBody />
-      </table>
+      <div className="table-container pb-12">
+        <table className="border-b border-gray-200 text-primaryBlue">
+          <TableHeader />
+          <TableBody />
+        </table>
+      </div>
     </section>
   );
 };
