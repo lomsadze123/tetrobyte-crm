@@ -1,6 +1,8 @@
 "use server";
 import { revalidatePath } from "next/cache";
 
+const API_URL = "https://tetrobyte-crm.onrender.com";
+
 const postStudent = async (formData: FormData) => {
   try {
     const studentData = {
@@ -29,7 +31,7 @@ const postStudent = async (formData: FormData) => {
       agent: formData.get("agent") as string,
     };
 
-    const response = await fetch("http://localhost:3001/api/postStudent", {
+    const response = await fetch(`${API_URL}/api/postStudent`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

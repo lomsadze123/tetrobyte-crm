@@ -1,8 +1,8 @@
+const API_URL = "https://tetrobyte-crm.onrender.com";
+
 const fetchSingleStudent = async (id: string) => {
   try {
-    const response = await fetch(
-      `http://localhost:3001/api/fetchStudent/${id}`
-    );
+    const response = await fetch(`${API_URL}/api/fetchStudent/${id}`);
 
     if (!response.ok) {
       throw new Error("Failed to fetching student");

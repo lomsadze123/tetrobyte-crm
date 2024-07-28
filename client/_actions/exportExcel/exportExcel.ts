@@ -1,6 +1,8 @@
+const API_URL = "https://tetrobyte-crm.onrender.com";
+
 const exportExcel = async (tableData: any) => {
   try {
-    const response = await fetch("http://localhost:3001/api/exportExcel", {
+    const response = await fetch(`${API_URL}/api/exportExcel`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

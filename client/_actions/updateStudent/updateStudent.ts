@@ -1,18 +1,17 @@
 "use server";
 import { revalidatePath } from "next/cache";
 
+const API_URL = "https://tetrobyte-crm.onrender.com";
+
 const updateStudent = async (id: string, updateData: any) => {
   try {
-    const response = await fetch(
-      `http://localhost:3001/api/updateStudent/${id}`,
-      {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(updateData),
-      }
-    );
+    const response = await fetch(`${API_URL}/api/updateStudent/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updateData),
+    });
 
     if (!response.ok) {
       throw new Error("Failed to update student");
