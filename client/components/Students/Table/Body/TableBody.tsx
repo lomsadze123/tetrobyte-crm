@@ -8,7 +8,7 @@ const TableBody = async () => {
       {studentData.students.map((item) => (
         <tr key={item._id}>
           {[
-            <div className="flex items-center">
+            <div key={item._id} className="flex items-center">
               <EditButton id={item._id} />
               <span>{item.personalNumber}</span>
             </div>,
@@ -32,7 +32,7 @@ const TableBody = async () => {
             item.firstName,
           ].map((content, index) => (
             <td
-              key={index}
+              key={item._id + index}
               className="border-b border-gray-200 px-8 py-4 whitespace-nowrap text-ellipsis"
             >
               {content}
