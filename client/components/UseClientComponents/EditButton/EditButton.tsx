@@ -2,32 +2,31 @@
 import deleteStudent from "@/_actions/deleteStudent/deleteStudent";
 import AddNewStudent from "@/components/AddNewStudent/AddNewStudent";
 import PopUpContainer from "@/components/PopUpContainer/PopUpContainer";
+import titles from "@/data/EditButtonTitles";
 import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EditButton = ({ id }: { id: string }) => {
-  const [getId, setGetId] = useState("");
+  const [selectedId, setSelectedId] = useState("");
   const [show, setShow] = useState(false);
-  const [askIndex, setAskIndex] = useState(-1);
+  const [activeIndex, setActiveIndex] = useState(-1);
 
-  const handleGetId = (id: string) => {
-    setGetId((prev) => (prev === id ? "" : id));
+  const handleSelectId = () => {
+    setSelectedId((prev) => (prev === id ? "" : id));
   };
 
   const handleShowPopUp = (index: number) => {
     setShow(true);
-    setAskIndex(index);
+    setActiveIndex(index);
+    index !== 1 ? setSelectedId("") : setSelectedId("id");
   };
 
-  const titles = [
-    "დეტალურად ნახვა",
-    "ნამდვილად გსურთ სტუდენტის წაშლა ?",
-    "რედაქტირება",
-  ];
-
-  const handleDeleteStudent = async (id: string) => {
+  const handleDeleteStudent = async () => {
     try {
       await deleteStudent(id);
       setShow(false);
+      toast.success("წარმატებით წაიშალა !");
     } catch (error) {
       console.log(error);
     }
@@ -35,13 +34,14 @@ const EditButton = ({ id }: { id: string }) => {
 
   return (
     <>
+      <ToastContainer />
       {show && (
-        <PopUpContainer title={titles[askIndex]} setShow={setShow}>
-          {askIndex === 0 && <AddNewStudent mode="view" id={id} />}
-          {askIndex === 1 && (
+        <PopUpContainer title={titles[activeIndex]} setShow={setShow}>
+          {activeIndex === 0 && <AddNewStudent mode="view" id={id} />}
+          {activeIndex === 1 && (
             <div className="flex items-center gap-2 mt-14">
               <button
-                onClick={() => handleDeleteStudent(getId)}
+                onClick={handleDeleteStudent}
                 className="bg-primaryBlue text-white w-full py-3 rounded-lg"
               >
                 კი
@@ -54,11 +54,13 @@ const EditButton = ({ id }: { id: string }) => {
               </button>
             </div>
           )}
-          {askIndex === 2 && <AddNewStudent mode="edit" id={id} />}
+          {activeIndex === 2 && (
+            <AddNewStudent mode="edit" id={id} setShow={setShow} />
+          )}
         </PopUpContainer>
       )}
       <span className="relative">
-        {getId === id && (
+        {selectedId === id && (
           <ul className="absolute p-3 -top-7 space-y-2 left-6 bg-white shadow text-left">
             {["დეტალურად ნახვა", "წაშლა", "რედაქტირება"].map((item, index) => (
               <li key={item}>
@@ -73,7 +75,7 @@ const EditButton = ({ id }: { id: string }) => {
           </ul>
         )}
         <button
-          onClick={() => handleGetId(id)}
+          onClick={handleSelectId}
           className="rotate-90 block text-xl font-bold"
         >
           ...

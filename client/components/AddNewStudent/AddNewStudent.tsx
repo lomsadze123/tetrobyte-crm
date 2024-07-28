@@ -3,13 +3,16 @@ import useStudent from "@/hooks/useStudent/useStudent";
 const StudentForm = ({
   mode,
   id,
+  setShow,
 }: {
   mode: "view" | "edit" | "add";
   id: string;
+  setShow?: (show: boolean) => void;
 }) => {
   const { handleSubmit, student, isReadOnly } = useStudent({
     mode,
     id,
+    setShow,
   });
 
   return (

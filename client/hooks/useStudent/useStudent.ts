@@ -2,13 +2,16 @@ import fetchStudent from "@/_actions/fetchSingleStudent/fetchSingleStudent";
 import postStudent from "@/_actions/postStudent/postStudent";
 import updateStudent from "@/_actions/updateStudent/updateStudent";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const useStudent = ({
   mode,
   id,
+  setShow,
 }: {
   mode: "view" | "edit" | "add";
   id: string;
+  setShow?: (show: boolean) => void;
 }) => {
   const isReadOnly = mode === "view";
   const [student, setStudent] = useState<StudentsTypes["students"][0] | null>(
@@ -31,11 +34,21 @@ const useStudent = ({
     const formData = new FormData(e.currentTarget);
     const studentData = Object.fromEntries(formData.entries());
 
-    if (mode === "add") {
-      await postStudent(new FormData(e.currentTarget));
-    } else if (mode === "edit") {
-      await updateStudent(id, studentData);
-    }
+    try {
+      if (mode === "add") {
+        const res = await postStudent(new FormData(e.currentTarget));
+
+        res.success
+          ? setShow && setShow(false)
+          : toast.error("შეავსეთ საჭირო ინფორმაცია !");
+      } else if (mode === "edit") {
+        const res = await updateStudent(id, studentData);
+
+        res
+          ? setShow && setShow(false)
+          : toast.error("შეავსეთ საჭირო ინფორმაცია !");
+      }
+    } catch (error) {}
   };
 
   return { handleSubmit, isReadOnly, student };

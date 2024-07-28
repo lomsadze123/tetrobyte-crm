@@ -9,7 +9,7 @@ const AddNew = () => {
     <>
       {show && (
         <PopUpContainer title="ახლის დამატება" setShow={setShow}>
-          <AddNewStudent mode="add" id={""} />
+          <AddNewStudent mode="add" id={""} setShow={setShow} />
         </PopUpContainer>
       )}
       <button
