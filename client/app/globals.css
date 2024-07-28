@@ -12,7 +12,7 @@ select {
   outline: none;
 }
 
-/* WebKit browsers (Chrome, Safari) */
+/* Chrome, Safari */
 .table-container::-webkit-scrollbar {
   height: 8px;
 }
