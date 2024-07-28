@@ -46,7 +46,7 @@ const EditButton = ({ id }: { id: string }) => {
       )}
       <span className="relative">
         {selectedId === id && (
-          <ul className="absolute p-3 -top-7 space-y-2 left-6 bg-white shadow text-left">
+          <ul className="absolute p-3 -top-7 space-y-2 left-6 bg-white shadow text-left font-semibold">
             {["დეტალურად ნახვა", "წაშლა", "რედაქტირება"].map((item, index) => (
               <li key={item}>
                 <button

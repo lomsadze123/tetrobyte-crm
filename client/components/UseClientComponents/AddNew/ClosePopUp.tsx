@@ -9,8 +9,10 @@ const ClosePopUp = ({
 }) => {
   return (
     <>
-      <h1>{title}</h1>
-      <button onClick={() => setShow(false)}>X</button>
+      <h1 className="text-2xl text-primaryBlue font-semibold">{title}</h1>
+      <button className="font-semibold text-xl" onClick={() => setShow(false)}>
+        X
+      </button>
     </>
   );
 };
