@@ -8,10 +8,8 @@ const exportExcel = async (req: Request, res: Response) => {
     const workbook = new excel.Workbook();
     const worksheet = workbook.addWorksheet("Exported Data");
 
-    // Add headers
     worksheet.addRow(Object.keys(tableData[0]));
 
-    // Add data
     tableData.forEach((row: { [s: string]: unknown } | ArrayLike<unknown>) => {
       worksheet.addRow(Object.values(row));
     });

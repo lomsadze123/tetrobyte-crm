@@ -7,6 +7,11 @@
   -webkit-overflow-scrolling: touch;
 }
 
+input,
+select {
+  outline: none;
+}
+
 /* WebKit browsers (Chrome, Safari) */
 .table-container::-webkit-scrollbar {
   height: 8px;
@@ -36,9 +41,4 @@
 .table-container::-webkit-scrollbar-thumb {
   background-color: #115ba4;
   border-radius: 4px;
-}
-
-input,
-select {
-  outline: none;
 }
