@@ -21,3 +21,24 @@ interface StudentsTypes {
     mobilitySemesterCourse: number;
   }[];
 }
+
+interface InputFieldTypes {
+  label: string;
+  name: string;
+  type: string;
+  placeholder: string;
+  readOnly: boolean;
+  defaultValue: string;
+}
+
+interface RadioGroupTypes {
+  label: string;
+  name: string;
+  options: string[];
+  disabled: boolean;
+}
+
+interface SelectFieldTypes extends RadioGroupTypes {
+  defaultValue: string | number;
+  isReadOnly: boolean;
+}

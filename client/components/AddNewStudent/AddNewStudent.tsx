@@ -1,4 +1,7 @@
 import useStudent from "@/hooks/useStudent/useStudent";
+import InputField from "../StudentForms/InputField";
+import SelectField from "../StudentForms/SelectField";
+import RadioGroup from "../StudentForms/RadioGroup";
 
 const StudentForm = ({
   mode,
@@ -22,286 +25,125 @@ const StudentForm = ({
         onSubmit={handleSubmit}
         className="grid grid-cols-2 gap-4 text-primaryBlue text-left"
       >
-        <div>
-          <label
-            htmlFor="firstName"
-            className="block mb-2 text-sm font-semibold"
-          >
-            სახელი
-          </label>
-          <input
-            id="firstName"
-            name="firstName"
-            type="text"
-            className="w-full border rounded px-3 py-2"
-            placeholder="სახელი"
-            readOnly={isReadOnly}
-            defaultValue={student?.firstName || ""}
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="lastName"
-            className="block mb-2 text-sm font-semibold"
-          >
-            გვარი
-          </label>
-          <input
-            id="lastName"
-            name="lastName"
-            type="text"
-            className="w-full border rounded px-3 py-2"
-            placeholder="გვარი"
-            readOnly={isReadOnly}
-            defaultValue={student?.lastName || ""}
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="personalNumber"
-            className="block mb-2 text-sm font-semibold"
-          >
-            პირადი ნომერი
-          </label>
-          <input
-            id="personalNumber"
-            name="personalNumber"
-            type="text"
-            maxLength={11}
-            className="w-full border rounded px-3 py-2"
-            placeholder="პირადი ნომერი"
-            readOnly={isReadOnly}
-            defaultValue={student?.personalNumber || ""}
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="enrollmentYear"
-            className="block mb-2 text-sm font-semibold"
-          >
-            ჩაბარების წელი
-          </label>
-          <select
-            id="enrollmentYear"
-            name="enrollmentYear"
-            className="w-full border rounded px-3 py-2"
-            disabled={isReadOnly}
-          >
-            <option>
-              {isReadOnly || mode === "edit" ? student?.enrollmentYear : "წელი"}
-            </option>
-            <option value="2020-2021">2020-2021</option>
-          </select>
-        </div>
-        <div>
-          <label
-            htmlFor="dateOfBirth"
-            className="block mb-2 text-sm font-semibold"
-          >
-            დაბადების თარიღი
-          </label>
-          <select
-            id="dateOfBirth"
-            name="dateOfBirth"
-            className="w-full border rounded px-3 py-2"
-            disabled={isReadOnly}
-          >
-            <option>
-              {isReadOnly || mode === "edit" ? student?.dateOfBirth : "თარიღი"}
-            </option>
-            <option value="2020">2000</option>
-          </select>
-        </div>
-        <div>
-          <label
-            htmlFor="birthCity"
-            className="block mb-2 text-sm font-semibold"
-          >
-            დაბადების ადგილი
-          </label>
-          <select
-            id="birthCity"
-            name="birthCity"
-            className="w-full border rounded px-3 py-2"
-            disabled={isReadOnly}
-          >
-            <option>
-              {isReadOnly || mode === "edit" ? student?.birthCity : "ქალაქი"}
-            </option>
-            <option value="რუსთავი">რუსთავი</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="school" className="block mb-2 text-sm font-semibold">
-            სკოლა
-          </label>
-          <select
-            id="school"
-            name="school"
-            className="w-full border rounded px-3 py-2"
-            disabled={isReadOnly}
-          >
-            <option>
-              {isReadOnly || mode === "edit" ? student?.school : "სკოლა"}
-            </option>
-            <option value="TLS">TLS</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="program" className="block mb-2 text-sm font-semibold">
-            პროგრამა
-          </label>
-          <select
-            id="program"
-            name="program"
-            className="w-full border rounded px-3 py-2"
-            disabled={isReadOnly}
-          >
-            <option>
-              {isReadOnly || mode === "edit" ? student?.program : "პროგრამა"}
-            </option>
-            <option value="CyberSecurity">CyberSecurity</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="voucher" className="block mb-2 text-sm font-semibold">
-            ვაუჩერი
-          </label>
-          <input
-            id="voucher"
-            name="voucher"
-            type="text"
-            className="w-full border rounded px-3 py-2"
-            placeholder="ვაუჩერი"
-            readOnly={isReadOnly}
-            defaultValue={student?.voucher || ""}
-          />
-        </div>
-        <div>
-          <label htmlFor="grant" className="block mb-2 text-sm font-semibold">
-            გრანტი
-          </label>
-          <select
-            id="grant"
-            name="grant"
-            className="w-full border rounded px-3 py-2"
-            disabled={isReadOnly}
-          >
-            <option>
-              {isReadOnly || mode === "edit" ? student?.grant : "გრანტი"}
-            </option>
-            <option value="700">700</option>
-          </select>
-        </div>
-        <div>
-          <label
-            htmlFor="citizenship"
-            className="block mb-2 text-sm font-semibold"
-          >
-            მოქალაქეობა
-          </label>
-          <select
-            id="citizenship"
-            name="citizenship"
-            className="w-full border rounded px-3 py-2"
-            disabled={isReadOnly}
-          >
-            <option>
-              {isReadOnly || mode === "edit"
-                ? student?.citizenship
-                : "მოქალაქეობა"}
-            </option>
-            <option value="საქართველო">საქართველო</option>
-            <option value="საქართველო">ინდოეთი</option>
-          </select>
-        </div>
-        <div>
-          <label
-            htmlFor="languageOfInstruction"
-            className="block mb-2 text-sm font-semibold"
-          >
-            სწავლის ენა
-          </label>
-          <select
-            id="languageOfInstruction"
-            name="languageOfInstruction"
-            className="w-full border rounded px-3 py-2"
-            disabled={isReadOnly}
-          >
-            <option>
-              {isReadOnly || mode === "edit"
-                ? student?.languageOfInstruction
-                : "ენა"}
-            </option>
-            <option value="English">English</option>
-          </select>
-        </div>
-        <div>
-          <label
-            className="block mb-2 text-sm font-semibold"
-            htmlFor="freshmanOrTransfer"
-          >
-            FRESHMAN / TRANSFER
-          </label>
-          <div className="flex items-center">
-            <input
-              type="radio"
-              name="freshmanOrTransfer"
-              value="FRESHMAN"
-              className="mr-2"
-              id="freshman"
-              disabled={isReadOnly}
-            />
-            <label className="mr-4" htmlFor="freshman">
-              FRESHMAN
-            </label>
-            <input
-              type="radio"
-              name="freshmanOrTransfer"
-              value="TRANSFER"
-              className="mr-2"
-              id="transfer"
-              disabled={isReadOnly}
-            />
-            <label htmlFor="transfer">TRANSFER</label>
-          </div>
-        </div>
-        <div>
-          <label
-            htmlFor="mobilitySemesterCourse"
-            className="block mb-2 text-sm font-semibold"
-          >
-            მობილობის სემესტრი
-          </label>
-          <select
-            id="mobilitySemesterCourse"
-            name="mobilitySemesterCourse"
-            className="w-full border rounded px-3 py-2"
-            disabled={isReadOnly}
-          >
-            <option>
-              {isReadOnly || mode === "edit"
-                ? student?.mobilitySemesterCourse
-                : "სემესტრი"}
-            </option>
-            <option value="8">8</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="agent" className="block mb-2 text-sm font-semibold">
-            აგენტი
-          </label>
-          <select
-            id="agent"
-            name="agent"
-            className="w-full border rounded px-3 py-2"
-            disabled={isReadOnly}
-            defaultValue={""} // i must add agent in here -----------------
-          >
-            <option>აგენტი</option>
-            <option value="პაატა">პაატა</option>
-          </select>
-        </div>
+        <InputField
+          label="სახელი"
+          name="firstName"
+          type="text"
+          placeholder="სახელი"
+          readOnly={isReadOnly}
+          defaultValue={student?.firstName || ""}
+        />
+        <InputField
+          label="გვარი"
+          name="lastName"
+          type="text"
+          placeholder="გვარი"
+          readOnly={isReadOnly}
+          defaultValue={student?.lastName || ""}
+        />
+        <InputField
+          label="პირადი ნომერი"
+          name="personalNumber"
+          type="text"
+          placeholder="პირადი ნომერი"
+          readOnly={isReadOnly}
+          defaultValue={student?.personalNumber || ""}
+        />
+        <SelectField
+          label="ჩაბარების წელი"
+          name="enrollmentYear"
+          options={["2020-2021"]}
+          disabled={isReadOnly}
+          defaultValue={student?.enrollmentYear || ""}
+          isReadOnly={mode === "view" || mode === "edit"}
+        />
+        <SelectField
+          label="დაბადების თარიღი"
+          name="dateOfBirth"
+          options={["2000"]}
+          disabled={isReadOnly}
+          defaultValue={student?.dateOfBirth || ""}
+          isReadOnly={mode === "view" || mode === "edit"}
+        />
+        <SelectField
+          label="დაბადების ადგილი"
+          name="birthCity"
+          options={["რუსთავი"]}
+          disabled={isReadOnly}
+          defaultValue={student?.birthCity || ""}
+          isReadOnly={mode === "view" || mode === "edit"}
+        />
+        <SelectField
+          label="სკოლა"
+          name="school"
+          options={["TLS"]}
+          disabled={isReadOnly}
+          defaultValue={student?.school || ""}
+          isReadOnly={mode === "view" || mode === "edit"}
+        />
+        <SelectField
+          label="პროგრამა"
+          name="program"
+          options={["CyberSecurity"]}
+          disabled={isReadOnly}
+          defaultValue={student?.program || ""}
+          isReadOnly={mode === "view" || mode === "edit"}
+        />
+        <InputField
+          label="ვაუჩერი"
+          name="voucher"
+          type="text"
+          placeholder="ვაუჩერი"
+          readOnly={isReadOnly}
+          defaultValue={student?.voucher || ""}
+        />
+        <SelectField
+          label="გრანტი"
+          name="grant"
+          options={["700"]}
+          disabled={isReadOnly}
+          defaultValue={student?.grant || ""}
+          isReadOnly={mode === "view" || mode === "edit"}
+        />
+        <SelectField
+          label="მოქალაქეობა"
+          name="citizenship"
+          options={["საქართველო", "ინდოეთი"]}
+          disabled={isReadOnly}
+          defaultValue={student?.citizenship || ""}
+          isReadOnly={mode === "view" || mode === "edit"}
+        />
+        <SelectField
+          label="სწავლის ენა"
+          name="languageOfInstruction"
+          options={["English"]}
+          disabled={isReadOnly}
+          defaultValue={student?.languageOfInstruction || ""}
+          isReadOnly={mode === "view" || mode === "edit"}
+        />
+        <RadioGroup
+          label="FRESHMAN / TRANSFER"
+          name="freshmanOrTransfer"
+          options={["FRESHMAN", "TRANSFER"]}
+          disabled={isReadOnly}
+        />
+        <SelectField
+          label="მობილობის სემესტრი"
+          name="mobilitySemesterCourse"
+          options={["8"]}
+          disabled={isReadOnly}
+          defaultValue={Number(student?.mobilitySemesterCourse || "")}
+          isReadOnly={mode === "view" || mode === "edit"}
+        />
+        <SelectField
+          label="აგენტი"
+          name="agent"
+          options={["პაატა"]}
+          disabled={isReadOnly}
+          defaultValue={""}
+          isReadOnly={mode === "view" || mode === "edit"}
+        />
+
         {mode !== "view" && (
           <div className="col-span-2">
             <button

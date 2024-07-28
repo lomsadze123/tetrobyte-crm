@@ -1,4 +1,4 @@
-const fetchStudent = async (id: string) => {
+const fetchSingleStudent = async (id: string) => {
   try {
     const response = await fetch(
       `http://localhost:3001/api/fetchStudent/${id}`
@@ -18,4 +18,4 @@ const fetchStudent = async (id: string) => {
   }
 };
 
-export default fetchStudent;
+export default fetchSingleStudent;

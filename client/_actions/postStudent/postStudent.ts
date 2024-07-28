@@ -23,8 +23,9 @@ const postStudent = async (formData: FormData) => {
       citizenship: formData.get("citizenship") as string,
       freshmanOrTransfer: formData.get("freshmanOrTransfer") as string,
       languageOfInstruction: formData.get("languageOfInstruction") as string,
-      mobilitySemesterCourse: (formData.get("mobilitySemesterCourse") ??
-        6) as number,
+      mobilitySemesterCourse: +(
+        formData.get("mobilitySemesterCourse") ?? 6
+      ) as number,
       agent: formData.get("agent") as string,
     };
 

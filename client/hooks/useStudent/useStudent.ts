@@ -1,4 +1,4 @@
-import fetchStudent from "@/_actions/fetchSingleStudent/fetchSingleStudent";
+import fetchSingleStudent from "@/_actions/fetchSingleStudent/fetchSingleStudent";
 import postStudent from "@/_actions/postStudent/postStudent";
 import updateStudent from "@/_actions/updateStudent/updateStudent";
 import { useEffect, useState } from "react";
@@ -21,7 +21,7 @@ const useStudent = ({
   useEffect(() => {
     if (mode !== "add") {
       const handleFetchStudent = async () => {
-        const response = await fetchStudent(id);
+        const response = await fetchSingleStudent(id);
         setStudent(response.student);
       };
 
