@@ -1,24 +1,34 @@
-# React Large Table with Smooth Horizontal Scrolling
+# NextJS Large Table with Smooth Horizontal Scrolling
 
 ## Overview
 
-This project demonstrates a React application featuring a large table with smooth horizontal scrolling. The table content moves using user-defined controls, offering a seamless user experience. The project emphasizes clean code practices and reusable components to ensure maintainability and scalability.
+This project demonstrates a NextJS application featuring a large table with smooth horizontal scrolling. The table content moves using user-defined controls, offering a seamless user experience. The project emphasizes clean code practices and reusable components to ensure maintainability and scalability.
 
 ## Features
 
 - **Large Data Table**: Handles large datasets efficiently.
 - **Smooth Horizontal Scrolling**: Table content moves smoothly without relying on the default scrollbar.
-- **Filter Mechanism**: Users can filter data by city and street, enhancing data accessibility.
 - **Reusable Components**: Modular components that can be reused across different parts of the application.
 - **Clean Code**: Adherence to best coding practices for readability and maintainability.
 
 ## Tech Stack
 
-- **React**: A JavaScript library for building user interfaces.
+### Client Side
+
+- **NextJS**: A React library for building user interfaces (SSR).
 - **Tailwind CSS**: A utility-first CSS framework for styling.
 - **TypeScript**: A strongly typed programming language that builds on JavaScript.
 
+### Server Side
+
+- **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine.
+- **Express**: A minimal and flexible Node.js web application framework.
+- **MongoDB**: A NoSQL database for storing large amounts of data.
+- **Mongoose**: An ODM (Object Data Modeling) library for MongoDB and Node.js.
+
 ## Installation
+
+### Client Side
 
 1. Clone the repository:
    ```sh
@@ -26,22 +36,46 @@ This project demonstrates a React application featuring a large table with smoot
    ```
 2. Navigate to the project directory:
    ```sh
-   cd large-table-scroll
+   cd tetrobyte-crm/client
    ```
 3. Install dependencies:
+
    ```sh
    npm install
    ```
 
-## Usage
+   4. Start the development server:
 
-1. Start the development server:
    ```sh
    npm start
    ```
-2. Open your browser and navigate to `http://localhost:3000` to see the application in action.
+
+   5. Open your browser and navigate to `http://localhost:3000` to see the application in action.
+
+### Server Side
+
+1. Navigate to the server directory:
+   ```sh
+   cd tetrobyte-crm/server
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Set up your environment variables:
+   - Create a `.env` file in the `server` directory and add your MongoDB URI and other environment variables as needed.
+   ```plaintext
+   MONGO_URI=your_mongodb_uri
+   PORT=3001
+   ```
+4. Start the server:
+   ```sh
+   npm start
+   ```
 
 ## Project Structure
+
+### Client Side
 
 ```plaintext
 src/
@@ -63,6 +97,24 @@ src/
 │   ├── data.ts
 │   └── helpers.ts
 └── App.tsx
+```
+
+### Server Side
+
+```plaintext
+server/
+├── models/
+│ └── TableData.js
+├── routes/
+│ └── tableData.js
+├── controllers/
+│ └── tableDataController.js
+├── config/
+│ └── db.js
+├── middlewares/
+│ └── errorHandler.js
+├── .env
+├── server.js
 ```
 
 ## Highlights
