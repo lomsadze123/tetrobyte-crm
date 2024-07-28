@@ -6,11 +6,13 @@ const TableBody = async () => {
 
   return (
     <tbody>
-      {studentData.students.map((item, index) => (
+      {studentData.students.map((item) => (
         <tr key={item._id}>
-          <td className="flex items-center border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            <EditButton id={item._id} />
-            <span>{item.personalNumber}</span>
+          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
+            <div className="flex items-center">
+              <EditButton id={item._id} />
+              <span>{item.personalNumber}</span>
+            </div>
           </td>
           <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
             {item.code}

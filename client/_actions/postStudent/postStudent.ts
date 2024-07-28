@@ -1,13 +1,19 @@
 "use server";
 import { revalidatePath } from "next/cache";
 
-const postUser = async (formData: FormData) => {
+const postStudent = async (formData: FormData) => {
   try {
     const studentData = {
       firstName: formData.get("firstName") as string,
       lastName: formData.get("lastName") as string,
       personalNumber: formData.get("personalNumber") as string,
       enrollmentYear: formData.get("enrollmentYear") as string,
+      graduationYear: `${
+        (formData.get("enrollmentYear") as string).split("-")[1]
+      }-
+        ${
+          Number((formData.get("enrollmentYear") as string).split("-")[1]) + 1
+        }`,
       birthCity: formData.get("birthCity") as string,
       dateOfBirth: formData.get("dateOfBirth") as string,
       school: formData.get("school") as string,
@@ -37,12 +43,12 @@ const postUser = async (formData: FormData) => {
     revalidatePath("/");
     return { success: true, message: "Created successfully" };
   } catch (error) {
-    console.log("Error while creating user", error);
+    console.log("Error while creating Student", error);
     return {
       success: false,
-      message: "An error occurred while creating the user",
+      message: "An error occurred while creating the Student",
     };
   }
 };
 
-export default postUser;
+export default postStudent;

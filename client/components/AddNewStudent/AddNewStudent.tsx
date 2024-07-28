@@ -1,5 +1,5 @@
 import fetchStudent from "@/_actions/fetchSingleStudent/fetchSingleStudent";
-import postUser from "@/_actions/postUser/postUser";
+import postStudent from "@/_actions/postStudent/postStudent";
 import updateStudent from "@/_actions/updateStudent/updateStudent";
 import { useEffect, useState } from "react";
 // import updateUser from "@/_actions/updateUser/updateUser";
@@ -12,7 +12,6 @@ const StudentForm = ({
   id: string;
 }) => {
   const isReadOnly = mode === "view";
-  // const formAction = mode === "add" ? postUser : "s";
   const [student, setStudent] = useState<StudentsTypes["students"][0] | null>(
     null
   );
@@ -34,7 +33,7 @@ const StudentForm = ({
     const studentData = Object.fromEntries(formData.entries());
 
     if (mode === "add") {
-      await postUser(studentData as unknown as FormData);
+      await postStudent(new FormData(e.currentTarget));
     } else if (mode === "edit") {
       await updateStudent(id, studentData);
     }
@@ -251,6 +250,7 @@ const StudentForm = ({
                 : "მოქალაქეობა"}
             </option>
             <option value="საქართველო">საქართველო</option>
+            <option value="საქართველო">ინდოეთი</option>
             {/* Add more options as needed */}
           </select>
         </div>
