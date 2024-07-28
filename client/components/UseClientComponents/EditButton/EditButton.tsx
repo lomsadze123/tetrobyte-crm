@@ -1,36 +1,21 @@
 "use client";
-import deleteStudent from "@/_actions/deleteStudent/deleteStudent";
 import AddNewStudent from "@/components/AddNewStudent/AddNewStudent";
 import PopUpContainer from "@/components/PopUpContainer/PopUpContainer";
 import titles from "@/data/EditButtonTitles";
-import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import useEditInfo from "@/hooks/useEditInfo/useEditInfo";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const EditButton = ({ id }: { id: string }) => {
-  const [selectedId, setSelectedId] = useState("");
-  const [show, setShow] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(-1);
-
-  const handleSelectId = () => {
-    setSelectedId((prev) => (prev === id ? "" : id));
-  };
-
-  const handleShowPopUp = (index: number) => {
-    setShow(true);
-    setActiveIndex(index);
-    index !== 1 ? setSelectedId("") : setSelectedId("id");
-  };
-
-  const handleDeleteStudent = async () => {
-    try {
-      await deleteStudent(id);
-      setShow(false);
-      toast.success("წარმატებით წაიშალა !");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const {
+    handleSelectId,
+    handleShowPopUp,
+    handleDeleteStudent,
+    selectedId,
+    show,
+    activeIndex,
+    setShow,
+  } = useEditInfo({ id });
 
   return (
     <>

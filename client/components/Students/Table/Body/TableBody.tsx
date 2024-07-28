@@ -3,71 +3,41 @@ import EditButton from "@/components/UseClientComponents/EditButton/EditButton";
 
 const TableBody = async () => {
   const studentData: StudentsTypes = await fetchStudents();
-
   return (
     <tbody>
       {studentData.students.map((item) => (
         <tr key={item._id}>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
+          {[
             <div className="flex items-center">
               <EditButton id={item._id} />
               <span>{item.personalNumber}</span>
-            </div>
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.code}
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.firstName}
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.lastName}
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.enrollmentYear}
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.graduationYear}
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.status}
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.school}
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.program}
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.email}
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.voucher} ₾
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.grant} ₾
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.citizenship}
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.dateOfBirth}
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.birthCity}
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.languageOfInstruction}
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.freshmanOrTransfer}
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.mobilitySemesterCourse}
-          </td>
-          <td className="border-b border-gray-200 px-4 py-2 text-center w-40 h-12">
-            {item.firstName}
-          </td>
+            </div>,
+            item.code,
+            item.firstName,
+            item.lastName,
+            item.enrollmentYear,
+            item.graduationYear,
+            item.status,
+            item.school,
+            item.program,
+            item.email,
+            `${item.voucher} ₾`,
+            `${item.grant} ₾`,
+            item.citizenship,
+            item.dateOfBirth,
+            item.birthCity,
+            item.languageOfInstruction,
+            item.freshmanOrTransfer,
+            item.mobilitySemesterCourse,
+            item.firstName,
+          ].map((content, index) => (
+            <td
+              key={index}
+              className="border-b border-gray-200 px-8 py-4 whitespace-nowrap text-ellipsis"
+            >
+              {content}
+            </td>
+          ))}
         </tr>
       ))}
     </tbody>
