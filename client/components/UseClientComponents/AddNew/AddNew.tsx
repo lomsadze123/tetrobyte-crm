@@ -14,7 +14,7 @@ const AddNew = () => {
       )}
       <button
         onClick={() => setShow(true)}
-        className="bg-primaryBlue text-white py-1 px-6  rounded-lg m-2"
+        className="bg-primaryBlue text-white py-1 px-6 rounded-lg"
       >
         ახლის დამატება
       </button>
