@@ -2,6 +2,8 @@
 import AddNewStudent from "@/components/AddNewStudent/AddNewStudent";
 import PopUpContainer from "@/components/PopUpContainer/PopUpContainer";
 import { useState } from "react";
+import PlusIcon from "@/public/plus.svg";
+import Image from "next/image";
 
 const AddNew = () => {
   const [show, setShow] = useState(false);
@@ -14,9 +16,10 @@ const AddNew = () => {
       )}
       <button
         onClick={() => setShow(true)}
-        className="bg-primaryBlue text-white py-1 px-6 rounded-lg"
+        className="flex items-center gap-2 bg-primaryBlue text-white py-2 px-6 rounded-lg"
       >
-        ახლის დამატება
+        <span>ახლის დამატება</span>
+        <Image src={PlusIcon} alt="Plus icon" />
       </button>
     </>
   );
