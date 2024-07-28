@@ -141,3 +141,7 @@ Tailwind CSS is used for styling:
 
 - **Utility-First**: Enables rapid UI development with utility classes.
 - **Responsive Design**: Ensures the application is responsive across different screen sizes.
+
+## Demo
+
+tetrobyte-crm.vercel.app
